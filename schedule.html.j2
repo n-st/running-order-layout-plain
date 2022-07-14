@@ -56,7 +56,7 @@ h1 {
     --vert-offset: 0px;
     /* [height] per 60 minutes */
     --vert-scale: 2.5em;
-    --start-hour: {{ minhour }};
+    --start-hour: 11;
 }
         </style>
     </head>
@@ -67,7 +67,7 @@ h1 {
             <div class="timeline">
                 <h2 class="stagename">&nbsp;</h2>
                 <div class="hours">
-                    {% for hour in range(minhour, maxhour+1) %}
+                    {% for hour in range(day.minhour, day.maxhour+1) %}
                     <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * {{ hour }} + 0) / 60 - var(--start-hour)))">{{ hour % 24 }}</div>
                     {% endfor %}
                 </div>

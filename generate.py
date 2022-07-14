@@ -21,8 +21,6 @@ def main():
     template = env.get_template("schedule.html.j2")
 
     content = {'days': {}}
-    minhour = 24
-    maxhour = 0
 
     with open('shows.csv', newline='') as csvfile:
         reader = csv.reader(csvfile, delimiter=';')
@@ -41,16 +39,18 @@ def main():
             if endh < DAY_ROLLOVER_HOUR:
                 endh += 24
             duration = (endh - starth) * 60 + (endm - startm)
-            minhour = min(minhour, starth)
-            maxhour = max(maxhour, endh)
             name = fields.get(4, '[no band name]')
             genre = fields.get(5, '')
             country = fields.get(6, '')
             year = fields.get(7, '')
             if day not in content['days']:
                 content['days'][day] = {
-                    'stages': {}
+                    'stages': {},
+                    'minhour': 24,
+                    'maxhour': 0,
                 }
+            content['days'][day]['minhour'] = min(content['days'][day]['minhour'], starth)
+            content['days'][day]['maxhour'] = max(content['days'][day]['maxhour'], endh)
             if stage not in content['days'][day]['stages']:
                 content['days'][day]['stages'][stage] = {
                     'bands': []
@@ -67,9 +67,6 @@ def main():
                 'year': year,
             }
             content['days'][day]['stages'][stage]['bands'].append(band)
-
-    content['minhour'] = minhour
-    content['maxhour'] = maxhour
 
     print(template.render(content))
 
