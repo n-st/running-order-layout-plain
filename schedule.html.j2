@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <style>
+html {
+    font-family: sans-serif;
+}
+h1 {
+    margin-bottom: 0;
+}
+.timeline, .stage {
+    display: inline-block;
+}
+.timeline {
+    min-width: 3em;
+}
+.stage {
+    min-width: 15em;
+}
+.hours, .bands {
+    position: relative;
+}
+.hour, .band {
+    position: absolute;
+}
+.hour {
+    border-top: 1px solid grey;
+    /* expand the hour div across the whole viewport to get the hour-line marker */
+    width: calc(100vw - 2 * 8px);
+}
+.band {
+    white-space: nowrap;
+    background: white;
+    border-left: 2px dotted black;
+}
+.band > div {
+    display: inline-block;
+}
+.bandtime {
+    font-size: small;
+    vertical-align: top;
+    margin: 0 0.2ex;
+}
+.bandrest {
+    margin: 0 0.5ex;
+}
+.bandinfo {
+    font-style: italic;
+}
+.bandinfo span:after {
+    content: ", ";
+}
+.bandinfo span:last-child:after {
+    content: "";
+}
+:root {
+    --vert-offset: 0px;
+    /* [height] per 60 minutes */
+    --vert-scale: 2.5em;
+    --start-hour: 16;
+}
+        </style>
+    </head>
+    <body>
+        {% for day in days %}
+        <div class="day">
+            <h1 class="daytext">{{ day.name }}</h1>
+            <div class="timeline">
+                <h2 class="stagename">&nbsp;</h2>
+                <div class="hours">
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 0) / 60 - var(--start-hour)))">16</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 17 + 0) / 60 - var(--start-hour)))">17</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 18 + 0) / 60 - var(--start-hour)))">18</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 19 + 0) / 60 - var(--start-hour)))">19</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 20 + 0) / 60 - var(--start-hour)))">20</div>
+                </div>
+            </div>
+            {% for stage in day.stages %}
+            <div class="stage">
+                <h2 class="stagename">{{ stage.name }}</h2>
+                <div class="bands">
+                    {% for band in stage.bands %}
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 50) / 60 - var(--start-hour))); height: calc(45 / 60 * var(--vert-scale))">
+                        <div class="bandtime">
+                            <div class="bandstart">{{ band.start }}</div>
+                            <div class="bandend">{{ band.end }}</div>
+                        </div>
+                        <div class="bandrest">
+                            <span class="bandname">{{ band.name }}</span>
+                            <div class="bandinfo">
+                                {% if band.genre %}
+                                <span class="bandgenre">{{ band.genre }}</span>
+                                {% endif %}
+                                {% if band.country %}
+                                <span class="bandcountry">{{ band.country }}</span>
+                                {% endif %}
+                                {% if band.year %}
+                                <span class="bandyear">{{ band.year }}</span>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}{# bands #}
+                </div>
+            </div>
+            {% endfor %}{# stages #}
+        </div>
+        {% endfor %}{# days #}
+    </body>
