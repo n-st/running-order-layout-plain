@@ -56,7 +56,7 @@ h1 {
     --vert-offset: 0px;
     /* [height] per 60 minutes */
     --vert-scale: 2.5em;
-    --start-hour: 16;
+    --start-hour: {{ minhour }};
 }
         </style>
     </head>
@@ -67,11 +67,9 @@ h1 {
             <div class="timeline">
                 <h2 class="stagename">&nbsp;</h2>
                 <div class="hours">
-                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 0) / 60 - var(--start-hour)))">16</div>
-                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 17 + 0) / 60 - var(--start-hour)))">17</div>
-                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 18 + 0) / 60 - var(--start-hour)))">18</div>
-                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 19 + 0) / 60 - var(--start-hour)))">19</div>
-                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 20 + 0) / 60 - var(--start-hour)))">20</div>
+                    {% for hour in range(minhour, maxhour+1) %}
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * {{ hour }} + 0) / 60 - var(--start-hour)))">{{ hour % 24 }}</div>
+                    {% endfor %}
                 </div>
             </div>
             {% for stagename, stage in day.stages.items() %}
@@ -79,10 +77,10 @@ h1 {
                 <h2 class="stagename">{{ stagename }}</h2>
                 <div class="bands">
                     {% for band in stage.bands %}
-                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * {{ band.starth }} + {{ band.startm }}) / 60 - var(--start-hour))); height: calc(45 / 60 * var(--vert-scale))">
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * {{ band.starth }} + {{ band.startm }}) / 60 - var(--start-hour))); height: calc({{ band.duration }} / 60 * var(--vert-scale))">
                         <div class="bandtime">
-                            <div class="bandstart">{{ '%d:%02d' % (band.starth, band.startm) }}</div>
-                            <div class="bandend">{{ '%d:%02d' % (band.endh, band.endm) }}</div>
+                            <div class="bandstart">{{ '%d:%02d' % (band.starth % 24, band.startm) }}</div>
+                            <div class="bandend">{{ '%d:%02d' % (band.endh % 24, band.endm) }}</div>
                         </div>
                         <div class="bandrest">
                             <span class="bandname">{{ band.name }}</span>
