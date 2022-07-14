@@ -61,9 +61,9 @@ h1 {
         </style>
     </head>
     <body>
-        {% for day in days %}
+        {% for dayname, day in days.items() %}
         <div class="day">
-            <h1 class="daytext">{{ day.name }}</h1>
+            <h1 class="daytext">{{ dayname }}</h1>
             <div class="timeline">
                 <h2 class="stagename">&nbsp;</h2>
                 <div class="hours">
@@ -74,15 +74,15 @@ h1 {
                     <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 20 + 0) / 60 - var(--start-hour)))">20</div>
                 </div>
             </div>
-            {% for stage in day.stages %}
+            {% for stagename, stage in day.stages.items() %}
             <div class="stage">
-                <h2 class="stagename">{{ stage.name }}</h2>
+                <h2 class="stagename">{{ stagename }}</h2>
                 <div class="bands">
                     {% for band in stage.bands %}
-                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 50) / 60 - var(--start-hour))); height: calc(45 / 60 * var(--vert-scale))">
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * {{ band.starth }} + {{ band.startm }}) / 60 - var(--start-hour))); height: calc(45 / 60 * var(--vert-scale))">
                         <div class="bandtime">
-                            <div class="bandstart">{{ band.start }}</div>
-                            <div class="bandend">{{ band.end }}</div>
+                            <div class="bandstart">{{ '%d:%02d' % (band.starth, band.startm) }}</div>
+                            <div class="bandend">{{ '%d:%02d' % (band.endh, band.endm) }}</div>
                         </div>
                         <div class="bandrest">
                             <span class="bandname">{{ band.name }}</span>
