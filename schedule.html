@@ -1,0 +1,113 @@
+<html>
+    <head>
+        <style>
+.timeline, .stage {
+    width: auto;
+    float: left;
+    min-width: 30%;
+}
+.hours, .bands {
+    position: relative;
+}
+.hour, .band {
+    position: absolute;
+    width: 100%;
+}
+.hour {
+    border-top: 1px solid grey;
+    width: calc(100vw - 2 * 8px);
+}
+.band {
+    width: auto;
+    white-space: nowrap;
+    background: white;
+}
+.bandtime {
+    font-size: small;
+    float: left;
+}
+.bandinfo {
+    font-style: italic;
+}
+.bandgenre:after, .bandcountry:after {
+    content: ", ";
+}
+:root {
+    --vert-offset: 0px;
+    --vert-scale: 2.5em;
+    --start-hour: 16;
+}
+        </style>
+    </head>
+    <body>
+        <div class="day">
+            <h1 class="daytext">Wed, 29.08.</h1>
+            <div class="timeline">
+                <h2 class="stagename">&nbsp;</h2>
+                <div class="hours">
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 0) / 60 - var(--start-hour)))">16</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 17 + 0) / 60 - var(--start-hour)))">17</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 18 + 0) / 60 - var(--start-hour)))">18</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 19 + 0) / 60 - var(--start-hour)))">19</div>
+                    <div class="hour" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 20 + 0) / 60 - var(--start-hour)))">20</div>
+                </div>
+            </div>
+            <div class="stage">
+                <h2 class="stagename">Main</h2>
+                <div class="bands">
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 50) / 60 - var(--start-hour)))">
+                        <div class="bandtime">
+                            <div class="bandstart">16:50</div>
+                            <div class="bandend">17:35</div>
+                        </div>
+                        <span class="bandname">PALLBEARER</span>
+                        <div class="bandinfo">
+                            <span class="bandgenre">Doom</span>
+                            <span class="bandcountry">US</span>
+                            <span class="bandyear">2008</span>
+                        </div>
+                    </div>
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 18 + 25) / 60 - var(--start-hour)))">
+                        <div class="bandtime">
+                            <div class="bandstart">18:25</div>
+                            <div class="bandend">19:10</div>
+                        </div>
+                        <span class="bandname">EXODUS</span>
+                        <div class="bandinfo">
+                            <span class="bandgenre">Doom</span>
+                            <span class="bandcountry">US</span>
+                            <span class="bandyear">2008</span>
+                        </div>
+                    </div>
+                </div>
+            </div><div class="stage">
+                <h2 class="stagename">Wera</h2>
+                <div class="bands">
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 16 + 5) / 60 - var(--start-hour)))">
+                        <div class="bandtime">
+                            <div class="bandstart">16:05</div>
+                            <div class="bandend">16:45</div>
+                        </div>
+                        <span class="bandname">SIAMESE</span>
+                        <div class="bandinfo">
+                            <span class="bandgenre">Doom</span>
+                            <span class="bandcountry">US</span>
+                            <span class="bandyear">2008</span>
+                        </div>
+                    </div>
+                    <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * 17 + 40) / 60 - var(--start-hour)))">
+                        <div class="bandtime">
+                            <div class="bandstart">17:40</div>
+                            <div class="bandend">18:20</div>
+                        </div>
+                        <span class="bandname">URNE</span>
+                        <div class="bandinfo">
+                            <span class="bandgenre">Doom</span>
+                            <span class="bandcountry">US</span>
+                            <span class="bandyear">2008</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
