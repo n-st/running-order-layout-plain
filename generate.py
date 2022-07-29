@@ -2,6 +2,7 @@
 # encoding: utf-8 (as per PEP 263)
 
 import sys
+import os
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import csv
 
@@ -15,10 +16,10 @@ DAY_ROLLOVER_HOUR = 7
 
 def main():
     env = Environment(
-        loader=FileSystemLoader("."),
+        loader=FileSystemLoader(os.path.dirname(os.path.abspath(__file__))),
         autoescape=select_autoescape()
     )
-    template = env.get_template("schedule.html.j2")
+    template = env.get_template("schedule.html.jinja")
 
     content = {'days': {}}
 
