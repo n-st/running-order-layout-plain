@@ -107,4 +107,7 @@ h1 {
             {% endfor %}{# stages #}
         </div>
         {% endfor %}{# days #}
+        {% if metainfo %}
+        <p>{{ metainfo }}</p>
+        {% endif %}
     </body>

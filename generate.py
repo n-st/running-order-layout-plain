@@ -5,6 +5,7 @@ import sys
 import os
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 import csv
+import argparse
 
 # The running order considers "Friday 1:30" as part of Thursday.
 # To simplify calculations, we internally represent it as "Thursday 25:30", and
@@ -20,6 +21,10 @@ def main():
         autoescape=select_autoescape()
     )
     template = env.get_template("schedule.html.jinja")
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--metainfo', default='', help='Additional information to add as a footnote (e.g. last update timestamp of input data)')
+    args = parser.parse_args()
 
     content = {'days': {}}
 
@@ -68,6 +73,7 @@ def main():
             'year': year,
         }
         content['days'][day]['stages'][stage]['bands'].append(band)
+        content['metainfo'] = args.metainfo
 
     print(template.render(content))
 
