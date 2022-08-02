@@ -84,7 +84,7 @@ h1 {
                     <div class="band" style="top: calc(var(--vert-offset) + var(--vert-scale) * ((60 * {{ band.starth }} + {{ band.startm }}) / 60 - {{ day.minhour }})); height: calc({{ band.duration }} / 60 * var(--vert-scale))">
                         <div class="bandtime">
                             <div class="bandstart">{{ '%d:%02d' % (band.starth % 24, band.startm) }}</div>
-                            <div class="bandend">{{ '%d:%02d' % (band.endh % 24, band.endm) }}</div>
+                            <div class="bandend">{{ '%d:%02d' % (band.endh % 24, band.endm) if band.duration else '&nbsp;' }}</div>
                         </div>
                         <div class="bandrest">
                             <span class="bandname">{{ band.name }}</span>

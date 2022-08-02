@@ -38,7 +38,7 @@ def main():
         stage = fields.get(1, 'unknown stage')
         start = fields.get(2, '12:34')
         starth, startm = [int(x) for x in start.split(':')]
-        end = fields.get(3, '12:35')
+        end = fields.get(3, start)
         endh, endm = [int(x) for x in end.split(':')]
         if starth < DAY_ROLLOVER_HOUR:
             starth += 24
